@@ -1,0 +1,16 @@
+<!--admin/ジャンル編集画面-->
+<div class="container my-5">
+    <h2>ジャンル編集</h2>
+    </div>
+    <%= form_for(@genre, url: admin_genre_path) do |f| %>
+
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+    <%= f.label :ジャンル名 %>
+    <%= f.text_field :name,class:"form-control", placeholder:"ジャンル名" %>
+    <%= f.submit '変更を保存' ,class: 'btn btn-success' %>
+    <% end %>
+    </div>
+    </div>
+  </div>

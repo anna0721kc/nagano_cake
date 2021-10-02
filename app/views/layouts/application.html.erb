@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NaganoCake</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <div class="container">
+      <a class="navbar-brand" href="/"><span>NaganoCake</span></a>
+      <% if admin_signed_in? %>
+      <ul class="navbar-nav ml-auto">
+      <li class="navitem">
+      <%= link_to admin_items_path do %>
+      <p id="navitem"><i class="fas fa-home"> 商品一覧</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to admin_customers_path do %>
+      <p id="navitem"><i class="fas fa-home"> 会員一覧</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to admin_path do %>
+      <p id="navitem"><i class="fas fa-home"> 注文履歴一覧</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to admin_genres_path do %>
+      <p id="navitem"><i class="fas fa-home"> ジャンル一覧</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to destroy_admin_session_path, method: :delete do %>
+      <p id="navitem"><i class="fas fa-home"> ログアウト</i></p>
+      <% end %>
+      </li>
+      </ul>
+      <% elsif customer_signed_in? %>
+      <span class="u h7 text-white strong">
+        ようこそ<%= current_customer.last_name %>さん！
+      </span>
+      <ul class="navbar-nav ml-auto">
+      <li class="navitem">
+      <%= link_to customers_my_page_path do %>
+      <p id="navitem"><i class="fas fa-home"> マイページ</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to items_path do %>
+      <p id="navitem"><i class="fas fa-home"> 商品一覧</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to cart_items_path do %>
+      <p id="navitem"><i class="fas fa-home"> カート</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to destroy_customer_session_path, method: :delete do %>
+      <p id="navitem"><i class="fas fa-home"> ログアウト</i></p>
+      <% end %>
+      </li>
+      </ul>
+      <% else %>
+      <!--ログイン前画面-->
+      <ul class="navbar-nav ml-auto">
+      <li class="navitem">
+      <%= link_to about_path do %>
+      <p id="navitem"><i class="fas fa-home"> About</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to admin_items_path do %>
+      <p id="navitem"><i class="fas fa-home"> 商品一覧</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to new_customer_registration_path do %>
+      <p id="navitem"><i class="fas fa-home"> 新規登録</i></p>
+      <% end %>
+      </li>
+      <li class="navitem">
+      <%= link_to new_customer_session_path do %>
+      <p id="navitem"><i class="fas fa-home"> ログイン</i></p>
+      <% end %>
+      </li>
+      </ul>
+      <% end %>
+      </div>
+      </nav>
+    </header>
+    <%= yield %>
+  </body>
+</html>

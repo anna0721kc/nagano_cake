@@ -1,0 +1,42 @@
+<!--admin/管理者top画面/注文履歴一覧-->
+<h2>注文履歴一覧</h2>
+<div class="row mt-3">
+    <div class="offset-sm-1 col-sm-10">
+<table class="table">
+    <thead>
+        <tr>
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文個数</th>
+            <th>注文ステータス</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+            <td><%= link_to order.created_at,admin_order_path(order) %></td>
+            <td>
+                <%= order.customer.last_name %>
+                <%= order.customer.first_name %>
+            </td>
+            <td>
+                <% @order.order_details.each do |order_detail| %><!--orderモデルの「order_details」"変数名.キーワード”(モデルファイルより)-->
+                <% @sum += order_detail.amount %>
+                <%= @sum %><!--後で消す-->
+                <% end %>
+                <%= @sum %>
+            </td>
+            <td><% 注文ステータス %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<div class="container">
+    <div class="row">
+    <div class="col-md-4 offset-md-4 py-2 mt-5">
+    <%= paginate @orders %>
+    </div>
+    </div>
+  </div>
+  </div>
+  </div>

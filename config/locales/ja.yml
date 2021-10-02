@@ -1,0 +1,14 @@
+#モデル同じ場合はカラムから記述
+#空白注意！必ずそろえる
+ja:
+  enums:
+    order:
+      payment_method:
+        credit_card: "クレジットカード"
+        transfer: "銀行振込"
+      status:
+        waiting: "入金待ち"
+        paid_up: "入金確認"
+        production: "制作中"
+        preparing: "発送準備中"
+        shipped: "発送済み"
