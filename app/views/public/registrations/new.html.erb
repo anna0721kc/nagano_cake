@@ -14,7 +14,7 @@
       <tr>
             <td><%= f.label :名前, class: "width" %></td>
             <td>
-              （姓）<%= f.text_field :last_name, placeholder:"長野", class:"form_width" %>
+              （姓）<%= f.text_field :last_name, autofocus: true, placeholder:"長野", class:"form_width" %>
               （名）<%= f.text_field :first_name, placeholder:"恵子", class:"form_width" %>
             </td>
       </tr>
@@ -28,7 +28,7 @@
       </tr>
       <tr>
             <td><%= f.label :メールアドレス, class: "width" %></td>
-            <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+            <td><%= f.email_field :email, autocomplete: "email" %></td>
       </tr>
       <tr>
         <td><%= f.label :郵便番号（ハイフンなし） %></td>
