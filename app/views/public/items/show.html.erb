@@ -10,13 +10,13 @@
         <%= @item.introduction %>
       </h5>
       <h5 class="item_price">
-        ￥<%= (@item.price * 1.1).floor %>（税込）
+        ￥<%= @item.with_tax_price.to_s(:delimited) %>（税込）
       </h5>
-
-      <% カート機能のform with %>
-      <%= 個数を選ぶプルダウン %>
-      <%= カートに入れるボタン %>
-
+      <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+      <%= f.hidden_field :item_id, :value => @item.id %>
+      <%= f.select :amount, *[1..10],include_blank: "個数を選択" %>
+      <%= f.submit'カートへ入れる' ,class: 'btn btn-success' %>
+      <% end %>
     </div>
   </div>
 </div>

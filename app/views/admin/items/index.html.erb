@@ -22,15 +22,15 @@
         <tr>
           <td><%= item.id %></td>
           <td><%= link_to item.name, admin_item_path(item) %></td>
-          <td><%= item.price %></td>
+          <td><%= item.price.to_s(:delimited) %></td>
           <td><%= item.genre.name %></td>
-          <td><%= item.is_active ? '販売中' : '販売停止中' %></td>
+          <td><%= item.is_active ? '販売中' : '売切れ' %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
-    <div class="text-center">
+  </div>
+  <div class="text-center">
     <%= paginate @items %>
     </div>
-  </div>
 </div>

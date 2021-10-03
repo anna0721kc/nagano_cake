@@ -20,9 +20,9 @@ Rails.application.routes.draw do
   patch '/customers/edit' => 'customers#update'
   get '/customers/unsubscribe' => 'customers#unsubscribe'#顧客の退会確認画面
   patch '/customers/withdraw' => 'customers#withdraw'#会員ステータスの切替
-  resources :cart_items, only: [:index, :update]
   delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
-  resources :orders, only: [:new, :index, :show]
+  resources :cart_items, only: [:index, :update, :destroy, :create]
+  resources :orders, only: [:new, :index, :show, :create]
   post '/orders/confirm' => 'orders#confirm'
   get '/orders/complete' => 'orders#complete'
   resources :addresses, except: [:new, :show]

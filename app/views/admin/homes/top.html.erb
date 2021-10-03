@@ -22,7 +22,7 @@
             <td>
                 <% @order.order_details.each do |order_detail| %><!--orderモデルの「order_details」"変数名.キーワード”(モデルファイルより)-->
                 <% @sum += order_detail.amount %>
-                <%= @sum %><!--後で消す-->
+                <%= @sum %><!--後で消す。endの下のが正解-->
                 <% end %>
                 <%= @sum %>
             </td>

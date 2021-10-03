@@ -1,0 +1,19 @@
+<!--注文情報入力画面-->
+<div class="container my-3">
+  <div class="row">
+    <h2>注文情報入力</h2>
+  </div>
+    <%= form_with model: @order, url: new_order_path, local: true do |f| %>
+    <div class="form-check mt-3">
+      <h4><strong>支払方法</strong></h4>
+      <%= f.radio_button :payment_method, "credit_card" %>
+      <%= f.label :payment_method, "クレジットカード" %><br/>
+      <%= f.radio_button :payment_method, "transfer" %>
+      <%= f.label :payment_method, "銀行振込" %>
+
+      <h4><strong>お届け先</strong></h4>
+      <%= f.radio_button %>
+      <%= current_customer.address %>
+    </div>
+    <% end %>
+</div>
