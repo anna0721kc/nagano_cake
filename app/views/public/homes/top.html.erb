@@ -24,7 +24,7 @@
           <span class="px-3"><%= item.name %></span>
         </div>
         <div class="row mt-1">
-          <span class="offset-8"><%= (item.price * 1.1).floor %> 円</span>
+          <span class="offset-8"><%= item.with_tax_price.to_s(:delimited) %> 円</span>
         </div>
       </div>
     <% end %>

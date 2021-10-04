@@ -5,13 +5,18 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
   end
 
-  def create
+  def confirm#注文確認newページから受け渡し。
     @order = Order.new(order_params)
-    @order.save
-    redirect_to orders_confirm_path(@order.id)
+    @address = Address.find(params[:order][:address_id])
+    @order.postal_code = @address.postal_code
+    @order.address = @address.address
+    @order.name = @address.name
   end
 
-  def confirm
+  def create#注文確定（注文情報入力画面で確定するボタンを押してデータ保存）
+    # @order = Order.new(order_params)
+    # @order.save
+    # redirect_to orders_confirm_path(@order.id)
   end
 
   def complete
@@ -23,4 +28,8 @@ class Public::OrdersController < ApplicationController
   def show
   end
 
+  private
+  def order_params
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
+  end
 end

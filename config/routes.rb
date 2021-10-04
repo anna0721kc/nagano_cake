@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   patch '/customers/withdraw' => 'customers#withdraw'#会員ステータスの切替
   delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
   resources :cart_items, only: [:index, :update, :destroy, :create]
-  resources :orders, only: [:new, :index, :show, :create]
   post '/orders/confirm' => 'orders#confirm'
+  resources :orders, only: [:new, :index, :show, :create]
   get '/orders/complete' => 'orders#complete'
   resources :addresses, except: [:new, :show]
   end

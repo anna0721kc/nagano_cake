@@ -3,17 +3,47 @@
   <div class="row">
     <h2>注文情報入力</h2>
   </div>
-    <%= form_with model: @order, url: new_order_path, local: true do |f| %>
-    <div class="form-check mt-3">
+  <!--form_widthのurlはconfirm！！！-->
+    <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
+    <div class="form-check mt-3 w-100">
       <h4><strong>支払方法</strong></h4>
+      <div class="ml-3">
       <%= f.radio_button :payment_method, "credit_card" %>
       <%= f.label :payment_method, "クレジットカード" %><br/>
       <%= f.radio_button :payment_method, "transfer" %>
       <%= f.label :payment_method, "銀行振込" %>
-
+      </div>
       <h4><strong>お届け先</strong></h4>
-      <%= f.radio_button %>
-      <%= current_customer.address %>
+      <%= f.radio_button :select_address, "0" %><!--「address_id」は疑似カラム。confirmで取り出す際に使用のみ--><!--address_id、""内は名前は決まりはない-->
+      <%= f.label :address_id, "ご自身の住所" %><br/>
+      <%= current_customer.address %><br/>
+
+      <%= f.radio_button :select_address, "1" %>
+      <%= f.label :address_id, "登録済住所から選択" %><br/>
+      <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %><br/>
+
+      <%= f.radio_button :select_address, "2" %>
+      <%= f.label :address_id, "新しいお届け先" %><br/>
+
+      <table class="row">
+        <tbody>
+          <tr>
+            <td>郵便番号（ハイフンなし）</td>
+            <td><%= f.text_field :postal_code, placeholder:"0000000", class:"form_width" %></td>
+          </tr>
+          <tr>
+            <td>住所</td>
+            <td><%= f.text_field :address, placeholder:"東京都渋谷区代々木0-1-2", class:"form_address" %></td>
+          </tr>
+          <tr>
+            <td>宛名</td>
+            <td><%= f.text_field :name, placeholder:"菓子甘子", class:"form_width" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+      <%= f.submit '確認画面へ進む', class: "btn btn-success" %>
+      </div>
+      <% end %>
     </div>
-    <% end %>
 </div>
