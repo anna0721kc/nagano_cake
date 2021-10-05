@@ -13,6 +13,7 @@
       <%= f.radio_button :payment_method, "transfer" %>
       <%= f.label :payment_method, "銀行振込" %>
       </div>
+
       <h4><strong>お届け先</strong></h4>
       <%= f.radio_button :select_address, "0" %><!--「address_id」は疑似カラム。confirmで取り出す際に使用のみ--><!--address_id、""内は名前は決まりはない-->
       <%= f.label :address_id, "ご自身の住所" %><br/>
