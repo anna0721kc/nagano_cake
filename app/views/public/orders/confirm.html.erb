@@ -3,7 +3,9 @@
   <div class="row">
     <h2>注文情報確認</h2>
   </div>
-  <table class="table table-hover table-bordered">
+
+  <div class="row my-3 d-flex">
+  <table class="table table-hover table-bordered col-8 table-sm">
     <thead>
       <tr>
         <td>商品名</td>
@@ -13,42 +15,46 @@
       </tr>
     </thead>
     <tbody>
-      <%  orderのeach文 %>
+      <% @cart_items.each do |cart_item| %>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+          <%= attachment_image_tag cart_item.item, :image, :fill, 50, 50, format: 'jpeg', fallback:"no_image.jpeg" %>
+          <%= cart_item.item.name %>
+        </td>
+        <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= cart_item.subtotal .to_s(:delimited) %></td>
+        <% @sum += cart_item.subtotal %><!--each文の中に書く！！-->
       </tr>
+      <% end %>
     </tbody>
   </table>
 
-  <table class="table table-hover table-bordered">
+  <table class="table table-hover table-bordered col-3 ml-1 table-sm">
     <tbody>
       <tr>
         <td>送料</td>
-        <td>< shipping_cost ></td>
+        <td><%= @shipping_cost %></td>
       </tr>
       <tr>
         <td>商品合計</td>
-        <td>< 小計の合計 ></td>
+        <td><%= @sum.to_s(:delimited) %></td>
       </tr>
       <tr>
         <td>請求金額</td>
-        <td>< 送料＋商品合計 total_payment ></td>
+        <% @total_payment = @sum + @shipping_cost %>
+        <td><%= @total_payment.to_s(:delimited) %></td>
       </tr>
     </tbody>
   </table>
-<% end %>
-
+  </div>
 <div class="row">
-  <h3><strong>支払方法</strong></h3>
-  < payment_method >
+  <h4><strong>支払方法</strong></h4>
 </div>
 
 <div class="row">
-  <h3><strong>お届け先</strong></h3>
-  <  >
+  <h4><strong>お届け先</strong></h4>
 </div>
-
+フォームウィズ
+hiddenフィールドを書く
 </div>
