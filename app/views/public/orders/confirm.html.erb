@@ -34,7 +34,7 @@
     <tbody>
       <tr>
         <td>送料</td>
-        <td><%= @shipping_cost %></td>
+        <td><%= @order.shipping_cost %></td>
       </tr>
       <tr>
         <td>商品合計</td>
@@ -42,7 +42,7 @@
       </tr>
       <tr>
         <td>請求金額</td>
-        <% @total_payment = @sum + @shipping_cost %>
+        <% @total_payment = @sum + @order.shipping_cost %>
         <td><%= @total_payment.to_s(:delimited) %></td>
       </tr>
     </tbody>
@@ -50,11 +50,27 @@
   </div>
 <div class="row">
   <h4><strong>支払方法</strong></h4>
+  <%= @order.payment_method_i18n %>
 </div>
 
 <div class="row">
   <h4><strong>お届け先</strong></h4>
+<%= "〒" + @order.postal_code %><br/>
+<%= @order.address %><br/>
+<%= @order.name %>
 </div>
-フォームウィズ
-hiddenフィールドを書く
+
+<div class="row justify-content-center">
+<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+<%= f.hidden_field :postal_code %>
+<%= f.hidden_field :address %>
+<%= f.hidden_field :name %>
+<%= f.hidden_field :shipping_cost %>
+<%= f.hidden_field :total_payment, value: @total_payment %>
+<%= f.hidden_field :payment_method %>
+<%= f.hidden_field :status %>
+<%= f.submit "注文を確定する", class: "btn btn-success" %>
+<% end %>
+</div>
+
 </div>
