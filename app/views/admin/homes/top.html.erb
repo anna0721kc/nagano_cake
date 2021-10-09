@@ -1,8 +1,8 @@
 <!--admin/管理者top画面/注文履歴一覧-->
-<h2>注文履歴一覧</h2>
 <div class="row mt-3">
     <div class="offset-sm-1 col-sm-10">
-<table class="table">
+        <h2>注文履歴一覧</h2>
+        <table class="table">
     <thead>
         <tr>
             <th>購入日時</th>
@@ -14,19 +14,13 @@
     <tbody>
         <% @orders.each do |order| %>
         <tr>
-            <td><%= link_to order.created_at,admin_order_path(order) %></td>
+            <td><%= link_to order.created_at.strftime("%Y/%m/%d/ %T"),admin_order_path(order) %></td>
             <td>
                 <%= order.customer.last_name %>
                 <%= order.customer.first_name %>
             </td>
-            <td>
-                <% @order.order_details.each do |order_detail| %><!--orderモデルの「order_details」"変数名.キーワード”(モデルファイルより)-->
-                <% @sum += order_detail.amount %>
-                <%= @sum %><!--後で消す。endの下のが正解-->
-                <% end %>
-                <%= @sum %>
-            </td>
-            <td><% 注文ステータス %></td>
+            <td><%= order.order_details.sum(:amount) %></td>
+            <td><%= order.status_i18n %></td>
         </tr>
         <% end %>
     </tbody>

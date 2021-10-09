@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     else
     root_path
     end
-    binding.pry
+
   end
 
   def after_sign_out_path_for(resources)

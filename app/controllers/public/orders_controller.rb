@@ -31,20 +31,32 @@ class Public::OrdersController < ApplicationController
 
 #注文確定（注文情報入力画面で確定するボタンを押してデータ保存）
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params)#confirmからの情報を受け取るためにparams忘れずに書く！！
     @order.customer_id = current_customer.id
     @order.save
-    redirect_to orders_complete_path
+    #order_detailへの保存
+    current_customer.cart_items.each do |cart_item|#カートの商品を1つずつ取り出しループ
+         @order_detail = OrderDetail.new#初期化宣言
+         @order_detail.order_id =  @order.id#order注文idを紐付け
+         @order_detail.item_id = cart_item.item_id
+         @order_detail.amount = cart_item.amount
+         @order_detail.price = cart_item.subtotal#税込み価格
+         @order_detail.save#注文商品を保存
+        end
+        current_customer.cart_items.destroy_all
+        redirect_to orders_complete_path
   end
 
   def complete
-
   end
 
   def index
+    @orders = current_customer.orders
   end
 
   def show
+    @order = Order.find(params[:id])
+
   end
 
   private
