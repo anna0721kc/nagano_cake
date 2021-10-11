@@ -1,5 +1,6 @@
 #会員側oedersコントローラ
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
   def new
     @order = Order.new
     @order.customer_id = current_customer.id
@@ -52,12 +53,14 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.page(params[:page]).per(8)
   end
 
   def show
     @order = Order.find(params[:id])
-
+    @order.customer_id = current_customer.id
+    @order_details = @order.order_details#「@order」は５９行目でモデル.findで定義しているもの
+    @sum = 0
   end
 
   private

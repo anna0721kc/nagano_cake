@@ -3,6 +3,7 @@ class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details#４行目の@order
+    @sum = 0
   end
 
   def update

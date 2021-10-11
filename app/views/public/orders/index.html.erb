@@ -1,5 +1,5 @@
 <!--会員側／注文履歴一覧-->
-<div class="container row mt-3 offset-1">
+<div class="container my-3">
 <h2>注文履歴一覧</h2>
   <table class="table table-hover table-bordered">
     <thead>
@@ -33,4 +33,7 @@
       <% end %>
     </tbody>
   </table>
+  <div class="page text-center">
+  <%= paginate @orders %>
+  </div>
 </div>

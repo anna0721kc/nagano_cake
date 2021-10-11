@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
 #配送先のコントローラ
 def index
   @address = Address.new
