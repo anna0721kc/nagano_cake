@@ -17,7 +17,10 @@
       <h4><strong>お届け先</strong></h4>
       <%= f.radio_button :select_address, "0" %><!--「address_id」は疑似カラム。confirmで取り出す際に使用のみ--><!--address_id、""内は名前は決まりはない-->
       <%= f.label :address_id, "ご自身の住所" %><br/>
+      〒<%= current_customer.postal_code %>
       <%= current_customer.address %><br/>
+      <%= current_customer.last_name %>
+      <%= current_customer.first_name %><br/>
 
       <%= f.radio_button :select_address, "1" %>
       <%= f.label :address_id, "登録済住所から選択" %><br/>
